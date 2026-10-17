@@ -1,0 +1,2574 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>ExamForge | A-Level Revision Hub</title> 
+ 
+<style> 
+:root { 
+  --theme: #2563eb; 
+  --theme-light: #dbeafe; 
+  --background: #f4f6fb; 
+  --surface: #ffffff; 
+  --text: #172033; 
+  --muted: #667085; 
+  --border: #e5e7eb; 
+} 
+ 
+* { box-sizing: border-box; } 
+ 
+body { 
+  margin: 0; 
+  font-family: Arial, sans-serif; 
+  background: var(--background); 
+  color: var(--text); 
+} 
+ 
+header { 
+  background: #111827; 
+  color: white; 
+  padding: 20px 5%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  gap: 16px; 
+  flex-wrap: wrap; 
+} 
+ 
+.brand { font-size: 25px; font-weight: 800; } 
+.brand span { color: #60a5fa; } 
+ 
+button, select, input, textarea { 
+  font: inherit; 
+} 
+ 
+button { 
+  border: 0; 
+  border-radius: 9px; 
+  padding: 11px 15px; 
+  cursor: pointer; 
+  font-weight: 700; 
+} 
+ 
+button:focus-visible, select:focus-visible, 
+input:focus-visible { 
+  outline: 3px solid #93c5fd; 
+  outline-offset: 2px; 
+} 
+ 
+.primary { 
+  background: var(--theme); 
+  color: white; 
+} 
+ 
+.secondary { 
+  background: var(--theme-light); 
+  color: var(--theme); 
+} 
+ 
+header select { 
+  padding: 10px; 
+  border-radius: 8px; 
+} 
+ 
+main { 
+  width: min(1100px, 92%); 
+  margin: 28px auto; 
+} 
+ 
+.hero { 
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-radius: 18px; 
+  padding: 28px; 
+  margin-bottom: 22px; 
+} 
+ 
+.eyebrow { 
+  color: var(--theme); 
+  font-weight: 800; 
+  text-transform: uppercase; 
+  font-size: 12px; 
+  letter-spacing: 1px; 
+} 
+ 
+h1 { margin: 10px 0; font-size: clamp(28px, 5vw, 42px); } 
+h2 { margin-top: 0; } 
+p { line-height: 1.6; } 
+.muted { color: var(--muted); } 
+ 
+.subject-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); 
+  gap: 15px; 
+} 
+ 
+.subject-card { 
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-top: 5px solid var(--card-colour); 
+  border-radius: 14px; 
+  padding: 20px; 
+  text-align: left; 
+  transition: transform .15s, box-shadow .15s; 
+} 
+ 
+.subject-card:hover { 
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 25px #00000012; 
+} 
+ 
+.subject-icon { font-size: 30px; } 
+.subject-name { font-size: 18px; margin: 12px 0 7px; } 
+.subject-desc { color: var(--muted); font-size: 13px; line-height: 1.5; } 
+ 
+.panel { 
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-radius: 15px; 
+  padding: 22px; 
+  margin-bottom: 20px; 
+} 
+ 
+.toolbar { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 10px; 
+  margin: 16px 0; 
+} 
+ 
+select, input { 
+  border: 1px solid var(--border); 
+  border-radius: 9px; 
+  padding: 11px; 
+  background: white; 
+  max-width: 100%; 
+} 
+ 
+label { font-weight: 700; font-size: 13px; } 
+.field { display: grid; gap: 7px; margin: 14px 0; } 
+ 
+.question { 
+  font-size: 20px; 
+  font-weight: 700; 
+  line-height: 1.55; 
+  margin: 18px 0; 
+  white-space: pre-line; 
+} 
+ 
+.feedback { 
+  padding: 14px; 
+  border-radius: 10px; 
+  background: var(--theme-light); 
+  margin-top: 14px; 
+  line-height: 1.6; 
+  white-space: pre-line; 
+} 
+ 
+.hidden { display: none; } 
+ 
+.stats { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px; 
+  margin-top: 20px; 
+} 
+ 
+.stat { 
+  background: var(--theme-light); 
+  border-radius: 10px; 
+  padding: 15px; 
+} 
+ 
+.stat strong { display: block; font-size: 24px; color: var(--theme); } 
+.stat span { font-size: 12px; color: var(--muted); } 
+ 
+.progress-track { 
+  height: 9px; 
+  background: var(--border); 
+  border-radius: 20px; 
+  overflow: hidden; 
+  margin-top: 8px; 
+} 
+ 
+.progress-fill { 
+  height: 100%; 
+  background: var(--theme); 
+  width: 0%; 
+  transition: width .2s; 
+} 
+ 
+footer { 
+  text-align: center; 
+  color: var(--muted); 
+  padding: 30px 15px; 
+  font-size: 12px; 
+} 
+ 
+@media(max-width: 550px) { 
+  .stats { grid-template-columns: 1fr; } 
+  .hero, .panel { padding: 18px; } 
+} 
+</style> 
+</head> 
+ 
+<body> 
+<header> 
+  <div class="brand">Exam<span>Forge</span></div> 
+  <label> 
+    Change subject 
+    <select id="subjectMenu" aria-label="Change subject"></select> 
+  </label> 
+</header> 
+ 
+<main> 
+  <section class="hero"> 
+    <div class="eyebrow">Your revision workspace</div> 
+    <h1 id="welcomeTitle">Build your knowledge.</h1> 
+    <p class="muted" id="welcomeText"> 
+      Choose a subject, practise questions, reveal hints and track your progress. 
+    </p> 
+    <button class="primary" id="startButton">Start revising</button> 
+  </section> 
+ 
+  <section id="homeView"> 
+    <h2>Choose a subject</h2> 
+    <p class="muted">Each subject has its own colour and revision workspace.</p> 
+    <div class="subject-grid" id="subjectGrid"></div> 
+  </section> 
+ 
+  <section id="studyView" class="hidden"> 
+    <div class="panel"> 
+      <div class="eyebrow" id="subjectEyebrow">Your subject</div> 
+      <h2 id="subjectHeading">Revision</h2> 
+      <p class="muted" id="subjectDescription"></p> 
+ 
+      <div class="toolbar"> 
+        <div class="field"> 
+          <label for="examBoard">Exam board</label> 
+          <select id="examBoard"></select> 
+        </div> 
+        <div class="field"> 
+          <label for="topicMenu">Topic</label> 
+          <select id="topicMenu"></select> 
+        </div> 
+      </div> 
+ 
+      <div class="stats"> 
+        <div class="stat"> 
+          <strong id="answeredStat">0</strong> 
+          <span>Questions attempted</span> 
+        </div> 
+        <div class="stat"> 
+          <strong id="correctStat">0</strong> 
+          <span>Correct answers</span> 
+        </div> 
+        <div class="stat"> 
+          <strong id="accuracyStat">0%</strong> 
+          <span>Accuracy</span> 
+        </div> 
+      </div> 
+      <p class="muted">Overall subject accuracy</p> 
+      <div class="progress-track"> 
+        <div class="progress-fill" id="progressFill"></div> 
+      </div> 
+    </div> 
+ 
+    <div class="panel"> 
+      <div class="eyebrow">Exam practice</div> 
+      <h2>Question</h2> 
+      <p class="muted" id="questionMeta"></p> 
+      <div class="question" id="questionText"></div> 
+ 
+      <div class="field"> 
+        <label for="answerInput">Your answer</label> 
+        <input id="answerInput" autocomplete="off" 
+               placeholder="Enter your answer"> 
+      </div> 
+ 
+      <div class="toolbar"> 
+        <button class="primary" id="checkButton">Check answer</button> 
+        <button class="secondary" id="hintButton">Hint 1</button> 
+        <button class="secondary" id="nextHintButton">Next hint</button> 
+        <button class="secondary" id="solutionButton">Show solution</button> 
+        <button class="secondary" id="nextButton">Next question</button> 
+      </div> 
+ 
+      <div id="feedback" class="feedback hidden" role="status"></div> 
+      <div id="hintPanel" class="feedback hidden"></div> 
+      <div id="solutionPanel" class="feedback hidden"></div> 
+    </div> 
+ 
+    <div class="panel"> 
+      <h2>Specification and learning resources</h2> 
+      <p class="muted"> 
+        Use the official qualification specification to check what your 
+        course requires. The link opens the exam board's qualification page. 
+      </p> 
+      <div class="toolbar"> 
+        <button class="primary" id="specButton">Open official specification</button> 
+        <button class="secondary" id="videoButton">Find a teaching video</button> 
+      </div> 
+      <p class="muted" id="resourceNote"></p> 
+    </div> 
+ 
+    <button class="secondary" id="backButton">← All subjects</button> 
+  </section> 
+</main> 
+ 
+<footer> 
+  ExamForge · Independent revision project · Original practice plus links to official exam-board papers. Always check your specification. 
+</footer> 
+ 
+<script> 
+"use strict"; 
+ 
+const subjects = [ 
+  { 
+    id: "maths", name: "A-Level Mathematics", icon: "📐", 
+    colour: "#2563eb", light: "#dbeafe", 
+    description: "Pure maths, statistics, mechanics and mixed exam practice.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR Mathematics A", "OCR MEI"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/mathematics/a-level/mathematics-7357", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR Mathematics A": "https://www.ocr.org.uk/qualifications/as-and-a-level/mathematics-a-h230-h240-from-2017/", 
+      "OCR MEI": "https://www.ocr.org.uk/qualifications/as-and-a-level/mathematics-mei-h630-h640-from-2017/" 
+    }, 
+    topics: [ 
+      "Algebra and functions", "Coordinate geometry", "Sequences and series", 
+      "Trigonometry", "Differentiation", "Integration", 
+      "Numerical methods", "Vectors", "Probability", "Kinematics" 
+    ] 
+  }, 
+  { 
+    id: "further", name: "Further Mathematics", icon: "∑", 
+    colour: "#0891b2", light: "#cffafe", 
+    description: "Advanced pure maths and optional applied modules.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR Mathematics A", "OCR MEI"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/mathematics", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR Mathematics A": "https://www.ocr.org.uk/qualifications/", 
+      "OCR MEI": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Complex numbers", "Matrices", "Further calculus", "Proof", "Further mechanics"] 
+  }, 
+  { 
+    id: "dt", name: "Design & Technology", icon: "🛠️", 
+    colour: "#16a34a", light: "#dcfce7", 
+    description: "Design decisions, materials, manufacture and evaluation.", 
+    boards: ["OCR"], 
+    boardLinks: {"OCR": "https://www.ocr.org.uk/qualifications/as-and-a-level/design-and-technology-h404-h406-from-2017/"}, 
+    topics: ["Design requirements", "Materials", "Manufacturing", "Sustainability", "Evaluation", "Exam answers"] 
+  }, 
+  { 
+    id: "business", name: "Business", icon: "💼", 
+    colour: "#9333ea", light: "#f3e8ff", 
+    description: "Business finance, operations, marketing and strategy.", 
+    boards: ["Pearson BTEC", "AQA", "Pearson Edexcel"], 
+    boardLinks: { 
+      "Pearson BTEC": "https://qualifications.pearson.com/", 
+      "AQA": "https://www.aqa.org.uk/subjects/business", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/" 
+    }, 
+    topics: ["Finance", "Marketing", "Operations", "Human resources", "Business strategy"] 
+  }, 
+  { 
+    id: "physics", name: "Physics", icon: "⚛️", 
+    colour: "#ea580c", light: "#ffedd5", 
+    description: "Equations, practicals, concepts and exam calculations.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/physics", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Mechanics", "Electricity", "Waves", "Fields", "Nuclear physics", "Practical skills"] 
+  }, 
+  { 
+    id: "chemistry", name: "Chemistry", icon: "🧪", 
+    colour: "#db2777", light: "#fce7f3", 
+    description: "Chemical calculations, reactions, bonding and analysis.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/chemistry", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Atomic structure", "Bonding", "Amount of substance", "Organic chemistry", "Equilibria"] 
+  }, 
+  { 
+    id: "biology", name: "Biology", icon: "🧬", 
+    colour: "#65a30d", light: "#ecfccb", 
+    description: "Cells, organisms, genetics, ecology and exam explanations.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/biology", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Cells", "Exchange", "Genetics", "Homeostasis", "Ecology"] 
+  }, 
+  { 
+    id: "computer", name: "Computer Science", icon: "💻", 
+    colour: "#475569", light: "#e2e8f0", 
+    description: "Programming, algorithms, systems and theory.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/computer-science", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Algorithms", "Programming", "Data structures", "Networks", "Systems"] 
+  }, 
+  { 
+    id: "english", name: "English", icon: "📚", 
+    colour: "#b45309", light: "#fef3c7", 
+    description: "Reading, interpretation, argument and essay planning.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/english", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Close analysis", "Essay planning", "Language", "Structure", "Context"] 
+  }, 
+  { 
+    id: "history", name: "History", icon: "🏛️", 
+    colour: "#92400e", light: "#fef3c7", 
+    description: "Historical knowledge, evidence, causation and evaluation.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/history", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Causes", "Consequences", "Change and continuity", "Sources", "Interpretations"] 
+  }, 
+  { 
+    id: "geography", name: "Geography", icon: "🌍", 
+    colour: "#0d9488", light: "#ccfbf1", 
+    description: "Physical processes, human geography, case studies and data.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/geography", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Physical processes", "Human geography", "Fieldwork", "Case studies", "Data skills"] 
+  }, 
+  { 
+    id: "economics", name: "Economics", icon: "📊", 
+    colour: "#7c3aed", light: "#ede9fe", 
+    description: "Markets, economic performance, policies and evaluation.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/economics", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Supply and demand", "Market failure", "Macroeconomics", "Policies", "Evaluation"] 
+  }, 
+  { 
+    id: "psychology", name: "Psychology", icon: "🧠", 
+    colour: "#c026d3", light: "#fae8ff", 
+    description: "Research methods, approaches, studies and evaluation.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/psychology", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Research methods", "Memory", "Social influence", "Approaches", "Evaluation"] 
+  }, 
+  { 
+    id: "sociology", name: "Sociology", icon: "👥", 
+    colour: "#4f46e5", light: "#e0e7ff", 
+    description: "Social theories, research, institutions and essay arguments.", 
+    boards: ["AQA", "Pearson Edexcel", "OCR"], 
+    boardLinks: { 
+      "AQA": "https://www.aqa.org.uk/subjects/sociology", 
+      "Pearson Edexcel": "https://qualifications.pearson.com/", 
+      "OCR": "https://www.ocr.org.uk/qualifications/" 
+    }, 
+    topics: ["Education", "Families", "Crime and deviance", "Research methods", "Theory"] 
+  } 
+]; 
+ 
+const questionBank = {
+  "further:Complex numbers": [{
+    q: "Write (3 + 2i) + (1 − 5i) in the form a + bi.",
+    answer: ["4-3i", "4 − 3i", "4-3i"],
+    hints: ["Add the real parts and imaginary parts separately.", "Real part: 3 + 1. Imaginary part: 2 − 5."],
+    solution: "(3 + 2i) + (1 − 5i) = 4 − 3i.",
+    explanation: "Combine like parts."
+  }],
+  "further:Matrices": [{
+    q: "For A = [[1, 2], [3, 4]], find the determinant.",
+    answer: ["-2", "−2"],
+    hints: ["For a 2 × 2 matrix, det(A) = ad − bc.", "Calculate 1 × 4 − 2 × 3."],
+    solution: "det(A) = 1(4) − 2(3) = −2.",
+    explanation: "Use the determinant formula for a 2 × 2 matrix."
+  }],
+  "further:Further calculus": [{
+    q: "Differentiate y = x³ + 2x².",
+    answer: ["3x^2+4x", "3x² + 4x", "3x^2 + 4x"],
+    hints: ["Use the power rule on each term.", "Bring each power down as a multiplier and reduce it by one."],
+    solution: "dy/dx = 3x² + 4x.",
+    explanation: "Differentiate each term separately."
+  }],
+  "further:Proof": [{
+    q: "Show that the sum of two consecutive integers is odd.",
+    answer: ["proof", "2n+1", "2n + 1"],
+    hints: ["Represent consecutive integers as n and n + 1.", "Their sum is n + (n + 1) = 2n + 1."],
+    solution: "Let the integers be n and n + 1. Their sum is 2n + 1, which is odd.",
+    explanation: "An odd integer has the form 2n + 1."
+  }],
+  "further:Further mechanics": [{
+    q: "A 2 kg object accelerates at 3 m s⁻². Find the resultant force.",
+    answer: ["6", "6n", "6 n"],
+    hints: ["Use Newton’s second law: F = ma.", "Multiply 2 by 3."],
+    solution: "F = ma = 2 × 3 = 6 N.",
+    explanation: "Resultant force equals mass multiplied by acceleration."
+  }],
+  "dt:Design requirements": [{
+    q: "State one measurable design requirement for a portable desk lamp.",
+    answer: ["must be stable", "stable", "must stand upright", "stand upright"],
+    hints: ["A measurable requirement can be tested.", "Consider stability, size, mass, brightness or power use."],
+    solution: "Example: the lamp must remain upright on a desk tilted by 5°.",
+    explanation: "Specific, testable requirements make evaluation objective."
+  }],
+  "dt:Materials": [{
+    q: "Name one property that makes aluminium useful for lightweight products.",
+    answer: ["low density", "lightweight", "low-density"],
+    hints: ["Think about mass relative to volume.", "Aluminium has a relatively low density compared with many metals."],
+    solution: "Aluminium has a relatively low density, so components can be lightweight.",
+    explanation: "Material properties should be linked to the product's use."
+  }],
+  "dt:Manufacturing": [{
+    q: "Why might injection moulding suit high-volume plastic component production?",
+    answer: ["low unit cost", "repeatable", "high production rate", "fast production"],
+    hints: ["Consider speed, consistency and cost over many units.", "Tooling is expensive, but each moulding cycle can produce parts quickly."],
+    solution: "It produces consistent components quickly, reducing unit cost at high volumes.",
+    explanation: "High initial tooling costs can be spread across many parts."
+  }],
+  "dt:Sustainability": [{
+    q: "Give one way to reduce the environmental impact of a product at end of life.",
+    answer: ["recycle", "design for disassembly", "reuse", "repair"],
+    hints: ["Think about extending life or recovering materials.", "Products can be designed to separate materials more easily."],
+    solution: "Design for disassembly so materials can be separated and recycled.",
+    explanation: "End-of-life design can reduce waste and improve material recovery."
+  }],
+  "dt:Evaluation": [{
+    q: "Why should a prototype be tested against the design specification?",
+    answer: ["check requirements", "check it meets requirements", "identify improvements"],
+    hints: ["Compare the prototype with the original measurable criteria.", "Testing reveals which requirements are met and what needs changing."],
+    solution: "To check whether the prototype meets the requirements and identify improvements.",
+    explanation: "Evaluation should use evidence against the specification."
+  }],
+  "dt:Exam answers": [{
+    q: "In a design exam answer, why is a specific example stronger than a vague statement?",
+    answer: ["it explains the application", "links to context", "contextualised", "specific example"],
+    hints: ["Connect the point to the product, user or manufacturing process.", "Explain how the example affects performance, cost or suitability."],
+    solution: "A specific example applies the principle to the context and explains its effect.",
+    explanation: "Develop points with context and a consequence."
+  }],
+  "business:Finance": [{
+    q: "A business sells 40 items for £12 each. Calculate its revenue.",
+    answer: ["480", "£480", "480 pounds"],
+    hints: ["Revenue = selling price × quantity sold.", "Calculate 40 × 12."],
+    solution: "Revenue = 40 × £12 = £480.",
+    explanation: "Revenue is income from sales before costs are deducted."
+  }],
+  "business:Marketing": [{
+    q: "What is the purpose of market segmentation?",
+    answer: ["divide market into groups", "identify customer groups", "group customers"],
+    hints: ["Think about customers with shared characteristics.", "Segmentation helps tailor marketing to different groups."],
+    solution: "It divides a market into customer groups with similar needs or characteristics.",
+    explanation: "Businesses can target suitable products and promotions."
+  }],
+  "business:Operations": [{
+    q: "What does quality control involve?",
+    answer: ["checking products", "inspect products", "checking output against standards"],
+    hints: ["Think about checking during or after production.", "Compare output with the required quality standard."],
+    solution: "Checking products or output against specified quality standards.",
+    explanation: "Quality control identifies defects and non-conforming output."
+  }],
+  "business:Human resources": [{
+    q: "Give one benefit of staff training to a business.",
+    answer: ["improved productivity", "fewer mistakes", "better skills", "improved performance"],
+    hints: ["Consider skills, output, errors and customer service.", "Training can help employees work more effectively."],
+    solution: "Training can improve skills and productivity or reduce mistakes.",
+    explanation: "Explain how the benefit affects business performance."
+  }],
+  "business:Business strategy": [{
+    q: "What is a SWOT analysis used to identify?",
+    answer: ["strengths weaknesses opportunities threats", "strengths, weaknesses, opportunities and threats", "swot"],
+    hints: ["SWOT has four categories.", "Two are internal and two are external."],
+    solution: "Strengths, weaknesses, opportunities and threats.",
+    explanation: "Strengths and weaknesses are internal; opportunities and threats are external."
+  }],
+  "physics:Mechanics": [{
+    q: "A 5 kg object accelerates at 2 m s⁻². Calculate the resultant force.",
+    answer: ["10", "10n", "10 n"],
+    hints: ["Use F = ma.", "Multiply 5 kg by 2 m s⁻²."],
+    solution: "F = 5 × 2 = 10 N.",
+    explanation: "Newton’s second law links force, mass and acceleration."
+  }],
+  "physics:Electricity": [{
+    q: "A 12 V supply is connected across a 4 Ω resistor. Calculate the current.",
+    answer: ["3", "3a", "3 a"],
+    hints: ["Use V = IR.", "Rearrange to I = V/R."],
+    solution: "I = 12/4 = 3 A.",
+    explanation: "Current equals potential difference divided by resistance."
+  }],
+  "physics:Waves": [{
+    q: "A wave has frequency 5 Hz and wavelength 2 m. Find its speed.",
+    answer: ["10", "10m/s", "10 m/s"],
+    hints: ["Use wave speed = frequency × wavelength.", "Calculate 5 × 2."],
+    solution: "v = fλ = 5 × 2 = 10 m s⁻¹.",
+    explanation: "Wave speed is frequency multiplied by wavelength."
+  }],
+  "physics:Fields": [{
+    q: "What force acts between two like electric charges?",
+    answer: ["repulsion", "they repel", "repulsive force"],
+    hints: ["Like charges behave differently from unlike charges.", "Two positive or two negative charges repel."],
+    solution: "They repel each other.",
+    explanation: "Like charges repel; unlike charges attract."
+  }],
+  "physics:Nuclear physics": [{
+    q: "What is the atomic number of an atom equal to?",
+    answer: ["number of protons", "protons"],
+    hints: ["It identifies the element.", "Use the number of positively charged particles in the nucleus."],
+    solution: "The number of protons in the nucleus.",
+    explanation: "The proton number defines the element."
+  }],
+  "physics:Practical skills": [{
+    q: "Why repeat measurements in an experiment?",
+    answer: ["improve reliability", "identify anomalies", "calculate a mean", "reduce random error"],
+    hints: ["Think about variation between readings.", "Repeated readings help identify anomalies and calculate a mean."],
+    solution: "To identify anomalous results and calculate a more reliable mean.",
+    explanation: "Repeats help assess random variation."
+  }],
+  "chemistry:Atomic structure": [{
+    q: "An atom has 11 protons and 12 neutrons. What is its mass number?",
+    answer: ["23"],
+    hints: ["Mass number = protons + neutrons.", "Add 11 and 12."],
+    solution: "Mass number = 11 + 12 = 23.",
+    explanation: "Mass number counts protons and neutrons."
+  }],
+  "chemistry:Bonding": [{
+    q: "What type of bond forms when a pair of electrons is shared between atoms?",
+    answer: ["covalent", "covalent bond"],
+    hints: ["Think about non-metal atoms sharing electrons.", "The shared pair forms a covalent bond."],
+    solution: "A covalent bond.",
+    explanation: "Covalent bonding involves shared pairs of electrons."
+  }],
+  "chemistry:Amount of substance": [{
+    q: "Calculate the amount in moles in 18 g of a substance with molar mass 18 g mol⁻¹.",
+    answer: ["1", "1 mol", "1mole"],
+    hints: ["Use n = m/M.", "Calculate 18/18."],
+    solution: "n = 18/18 = 1 mol.",
+    explanation: "Amount in moles equals mass divided by molar mass."
+  }],
+  "chemistry:Organic chemistry": [{
+    q: "What is the functional group in an alcohol?",
+    answer: ["oh", "−oh", "hydroxyl", "hydroxyl group"],
+    hints: ["Look for the characteristic group in alcohol molecules.", "Alcohols contain an –OH group."],
+    solution: "The hydroxyl group, –OH.",
+    explanation: "Functional groups determine characteristic organic reactions."
+  }],
+  "chemistry:Equilibria": [{
+    q: "What happens to the equilibrium position if more reactant is added at constant temperature?",
+    answer: ["shifts to products", "towards products", "right"],
+    hints: ["Apply Le Chatelier’s principle.", "The system responds by using up some of the added reactant."],
+    solution: "It shifts towards the products.",
+    explanation: "The equilibrium shifts to oppose the change."
+  }],
+  "biology:Cells": [{
+    q: "Which organelle is the main site of aerobic respiration?",
+    answer: ["mitochondrion", "mitochondria"],
+    hints: ["Think about the organelle that releases energy from respiratory substrates.", "It is commonly called the cell's powerhouse."],
+    solution: "The mitochondrion (plural: mitochondria).",
+    explanation: "Aerobic respiration mainly occurs in mitochondria."
+  }],
+  "biology:Exchange": [{
+    q: "What is diffusion?",
+    answer: ["net movement from high to low concentration", "movement from high to low concentration", "net movement of particles down a concentration gradient"],
+    hints: ["Consider random particle movement and the overall direction.", "Particles move down a concentration gradient overall."],
+    solution: "The net movement of particles from higher to lower concentration.",
+    explanation: "Diffusion is a passive process."
+  }],
+  "biology:Genetics": [{
+    q: "What is an allele?",
+    answer: ["version of a gene", "a version of a gene"],
+    hints: ["Genes can exist in different forms.", "Each form of a gene is called an allele."],
+    solution: "A version of a gene.",
+    explanation: "Alleles can contribute to variation in inherited characteristics."
+  }],
+  "biology:Homeostasis": [{
+    q: "What is homeostasis?",
+    answer: ["maintaining a stable internal environment", "maintaining stable internal conditions", "stable internal environment"],
+    hints: ["Think about keeping internal conditions within suitable limits.", "Examples include temperature and blood glucose."],
+    solution: "Maintaining a stable internal environment.",
+    explanation: "Regulatory mechanisms keep conditions within appropriate ranges."
+  }],
+  "biology:Ecology": [{
+    q: "What is a producer in a food chain?",
+    answer: ["organism that makes its own food", "plant", "producer makes its own food"],
+    hints: ["Think about organisms that usually use light energy.", "Green plants make organic molecules by photosynthesis."],
+    solution: "An organism that makes its own organic food, usually by photosynthesis.",
+    explanation: "Producers form the base of many food chains."
+  }],
+  "computer:Algorithms": [{
+    q: "What is the purpose of an algorithm?",
+    answer: ["step by step solution", "a sequence of steps to solve a problem", "steps to solve a problem"],
+    hints: ["Think about a defined procedure for a task.", "It sets out the steps needed to solve a problem."],
+    solution: "A finite sequence of steps for solving a problem.",
+    explanation: "Algorithms can be represented with pseudocode or flowcharts."
+  }],
+  "computer:Programming": [{
+    q: "What is a variable used for in a program?",
+    answer: ["store data", "store a value", "hold data"],
+    hints: ["Think about data that a program can read or change.", "A variable has a name and holds a value."],
+    solution: "To store a value that a program can use or change.",
+    explanation: "Variables represent data during program execution."
+  }],
+  "computer:Data structures": [{
+    q: "Which data structure uses first-in, first-out order?",
+    answer: ["queue", "a queue"],
+    hints: ["Consider a line of people waiting.", "The first item added is the first item removed."],
+    solution: "A queue.",
+    explanation: "Queues use FIFO ordering."
+  }],
+  "computer:Networks": [{
+    q: "What does IP stand for in IP address?",
+    answer: ["internet protocol", "internet protocol."],
+    hints: ["It is the protocol used for addressing and routing packets.", "The abbreviation has two words."],
+    solution: "Internet Protocol.",
+    explanation: "IP addresses identify network interfaces for communication."
+  }],
+  "computer:Systems": [{
+    q: "What is the role of an operating system?",
+    answer: ["manage hardware and software resources", "manages hardware and software", "manage resources"],
+    hints: ["Consider memory, processes, files and peripherals.", "The OS coordinates resources and provides services to applications."],
+    solution: "To manage hardware and software resources and provide services to applications.",
+    explanation: "Operating systems coordinate a computer's resources."
+  }],
+  "english:Close analysis": [{
+    q: "What is a metaphor?",
+    answer: ["a comparison saying one thing is another", "comparison saying one thing is another", "a direct comparison"],
+    hints: ["It compares without using 'like' or 'as'.", "For example, 'time is a thief' is a metaphor."],
+    solution: "A figure of speech that describes one thing as another.",
+    explanation: "Metaphors can create imagery and shape a reader’s interpretation."
+  }],
+  "english:Essay planning": [{
+    q: "What should a clear analytical paragraph do?",
+    answer: ["make a point, use evidence, analyse it", "point evidence analysis", "make a point and analyse evidence"],
+    hints: ["Use a claim, relevant evidence and explanation.", "Explain how the evidence supports your argument."],
+    solution: "Make a point, support it with evidence, and analyse the evidence.",
+    explanation: "A paragraph should advance the overall argument."
+  }],
+  "english:Language": [{
+    q: "What is alliteration?",
+    answer: ["repetition of initial consonant sounds", "repeated initial consonant sounds", "repetition of consonant sounds at the start"],
+    hints: ["Listen to the beginning sounds of nearby words.", "For example, 'wild winds whistle'."],
+    solution: "The repetition of initial consonant sounds in nearby words.",
+    explanation: "Alliteration can create rhythm or emphasise an idea."
+  }],
+  "english:Structure": [{
+    q: "In a text, what does foreshadowing do?",
+    answer: ["hints at future events", "hints at what happens later", "suggests future events"],
+    hints: ["Think about clues placed before an event occurs.", "Those clues prepare the reader for later developments."],
+    solution: "It gives hints about events that happen later.",
+    explanation: "Foreshadowing can build anticipation or tension."
+  }],
+  "english:Context": [{
+    q: "Why is historical or social context relevant to literary analysis?",
+    answer: ["helps explain meanings and attitudes", "explains meanings and attitudes", "helps explain the text"],
+    hints: ["Consider the values and circumstances surrounding a text.", "Context can help explain choices, themes and contemporary responses."],
+    solution: "It can help explain the text’s ideas, attitudes and audience response.",
+    explanation: "Use context to support interpretation rather than replace close analysis."
+  }],
+  "history:Causes": [{
+    q: "What is a long-term cause of an event?",
+    answer: ["a factor developing over time", "factor developing over time", "a cause that develops over time"],
+    hints: ["Contrast it with an immediate trigger.", "Long-term causes build conditions over an extended period."],
+    solution: "A factor that develops over time and helps make an event more likely.",
+    explanation: "Distinguish underlying causes from short-term triggers."
+  }],
+  "history:Consequences": [{
+    q: "What is one way to assess the significance of a historical consequence?",
+    answer: ["consider scale and duration", "scale and duration", "how many people affected and how long it lasted"],
+    hints: ["Consider who was affected and for how long.", "Scale, duration and importance are useful measures."],
+    solution: "Assess its scale, duration and impact on different groups.",
+    explanation: "Significance requires a reasoned judgement."
+  }],
+  "history:Change and continuity": [{
+    q: "What does continuity mean in history?",
+    answer: ["what stayed the same", "features that stayed the same", "what remained unchanged"],
+    hints: ["Compare conditions before and after an event.", "Continuity identifies features that persisted."],
+    solution: "Features or conditions that remained broadly the same over time.",
+    explanation: "Analyse both change and continuity across the period."
+  }],
+  "history:Sources": [{
+    q: "Why should a historian consider a source's provenance?",
+    answer: ["origin and purpose affect reliability", "origin and purpose", "who made it and why"],
+    hints: ["Consider who created it, when, and for what purpose.", "These factors help assess what the source can reveal."],
+    solution: "Its origin, author, date and purpose help assess its value and limitations.",
+    explanation: "Provenance informs source evaluation."
+  }],
+  "history:Interpretations": [{
+    q: "What is a historical interpretation?",
+    answer: ["an explanation of the past", "explanation of the past", "a historian's explanation of the past"],
+    hints: ["It is more than a source's factual detail.", "Historians select and explain evidence to construct arguments."],
+    solution: "An explanation or argument about the past.",
+    explanation: "Interpretations can differ because historians use evidence and perspectives differently."
+  }],
+  "geography:Physical processes": [{
+    q: "What causes erosion by hydraulic action?",
+    answer: ["force of water and compressed air", "water forcing air into cracks", "water pressure in cracks"],
+    hints: ["Consider water entering cracks in rock.", "Pressure changes can weaken and break rock."],
+    solution: "Water enters cracks, compresses air and exerts pressure that breaks rock.",
+    explanation: "Hydraulic action is a type of erosion."
+  }],
+  "geography:Human geography": [{
+    q: "What is urbanisation?",
+    answer: ["increase in proportion living in urban areas", "growth in proportion of people living in urban areas", "growth of urban population share"],
+    hints: ["Think about the proportion of a population living in towns and cities.", "Urbanisation is a change in the share living in urban areas."],
+    solution: "An increase in the proportion of people living in urban areas.",
+    explanation: "It can result from migration and natural population change."
+  }],
+  "geography:Fieldwork": [{
+    q: "Why use a sampling strategy in fieldwork?",
+    answer: ["collect representative data", "reduce bias", "representative data"],
+    hints: ["Consider how locations or participants are selected.", "A planned sample can improve fairness and coverage."],
+    solution: "To collect data systematically and reduce sampling bias.",
+    explanation: "Sampling methods affect how representative the findings are."
+  }],
+  "geography:Case studies": [{
+    q: "What makes a strong geography case-study answer?",
+    answer: ["specific place evidence and data", "place-specific evidence", "specific facts and data"],
+    hints: ["Use named locations and relevant facts.", "Explain how the evidence supports the point."],
+    solution: "Named-place evidence, accurate data and explanation linked to the question.",
+    explanation: "Specific evidence strengthens geographical explanations."
+  }],
+  "geography:Data skills": [{
+    q: "A map scale is 1:50,000. What real distance does 2 cm represent?",
+    answer: ["1 km", "1000 m", "100000 cm"],
+    hints: ["1 cm on the map represents 50,000 cm on the ground.", "For 2 cm, calculate 100,000 cm and convert to kilometres."],
+    solution: "2 cm represents 100,000 cm = 1,000 m = 1 km.",
+    explanation: "Convert map distance to ground distance using the scale."
+  }],
+  "economics:Supply and demand": [{
+    q: "If demand increases and supply stays constant, what usually happens to equilibrium price?",
+    answer: ["increases", "goes up", "rises"],
+    hints: ["An increase in demand shifts the demand curve right.", "At the original price, there is excess demand."],
+    solution: "Equilibrium price usually rises.",
+    explanation: "The new equilibrium has a higher price, all else equal."
+  }],
+  "economics:Market failure": [{
+    q: "What is a negative externality?",
+    answer: ["cost imposed on a third party", "cost to a third party", "external cost"],
+    hints: ["Think about costs affecting people outside the transaction.", "Pollution can impose costs on others."],
+    solution: "A cost imposed on a third party not fully reflected in the market price.",
+    explanation: "Negative externalities can cause overproduction."
+  }],
+  "economics:Macroeconomics": [{
+    q: "What does inflation measure?",
+    answer: ["rate of increase in general price level", "increase in general price level", "general price level rising"],
+    hints: ["It concerns prices across the economy, not just one item.", "Inflation is usually reported as a rate over time."],
+    solution: "The rate at which the general price level rises over time.",
+    explanation: "A sustained rise in the overall price level reduces purchasing power."
+  }],
+  "economics:Policies": [{
+    q: "What is one way a central bank may reduce inflation?",
+    answer: ["raise interest rates", "increase interest rates", "higher interest rates"],
+    hints: ["Consider how borrowing and spending respond to interest rates.", "Higher rates tend to reduce borrowing and aggregate demand."],
+    solution: "Raise interest rates to reduce borrowing and demand pressures.",
+    explanation: "The effect depends on how households and firms respond."
+  }],
+  "economics:Evaluation": [{
+    q: "Why might an economic policy have different effects in the short run and long run?",
+    answer: ["time lags and changing responses", "time lags", "effects take time"],
+    hints: ["Consider how quickly behaviour and investment adjust.", "Policies can have delayed or changing effects."],
+    solution: "Because of time lags and changes in behaviour, investment and capacity.",
+    explanation: "Evaluation considers the time period and wider conditions."
+  }],
+  "psychology:Research methods": [{
+    q: "What is a hypothesis in psychological research?",
+    answer: ["testable prediction", "a testable prediction"],
+    hints: ["It predicts a relationship or outcome that can be investigated.", "It must be capable of being tested with evidence."],
+    solution: "A testable prediction about an outcome or relationship.",
+    explanation: "A hypothesis should be operationalised where appropriate."
+  }],
+  "psychology:Memory": [{
+    q: "What is the role of the central executive in working memory?",
+    answer: ["directs attention and coordinates components", "coordinates components", "directs attention"],
+    hints: ["Think about the system that controls attention.", "It allocates resources between working-memory components."],
+    solution: "It directs attention and coordinates the other working-memory components.",
+    explanation: "The central executive has limited capacity."
+  }],
+  "psychology:Social influence": [{
+    q: "What is conformity?",
+    answer: ["changing behaviour or beliefs to match a group", "matching a group", "changing behaviour to fit a group"],
+    hints: ["Consider adjusting to group norms or pressure.", "The change may be public or private."],
+    solution: "Changing behaviour or beliefs to align with a group.",
+    explanation: "Conformity can be influenced by normative or informational factors."
+  }],
+  "psychology:Approaches": [{
+    q: "What does the behaviourist approach emphasise?",
+    answer: ["observable behaviour and learning", "observable behaviour", "learning through conditioning"],
+    hints: ["Think about conditioning and the environment.", "Behaviourists focus on learned, observable behaviour."],
+    solution: "Observable behaviour and how it is learned through environmental experiences.",
+    explanation: "Classical and operant conditioning are key concepts."
+  }],
+  "psychology:Evaluation": [{
+    q: "Why is sample representativeness important in psychological research?",
+    answer: ["supports generalisation", "generalise findings", "findings apply to target population"],
+    hints: ["Consider whether participants reflect the target population.", "A biased sample can limit conclusions."],
+    solution: "It affects how confidently findings can be generalised to the target population.",
+    explanation: "Generalisability is one aspect of external validity."
+  }],
+  "sociology:Education": [{
+    q: "What is one function of education according to functionalists?",
+    answer: ["socialisation", "transmit shared norms and values", "transmit norms and values"],
+    hints: ["Consider how schools prepare pupils for society.", "Schools can transmit shared norms and values."],
+    solution: "Socialisation: transmitting shared norms and values.",
+    explanation: "Functionalists often view education as supporting social integration."
+  }],
+  "sociology:Families": [{
+    q: "What is meant by the nuclear family?",
+    answer: ["parents and dependent children", "two parents and dependent children", "parents with dependent children"],
+    hints: ["Think of a household unit consisting of parents and their children.", "Definitions can vary by course context."],
+    solution: "A family unit consisting of parent(s) and dependent child(ren); commonly defined as two parents and their children.",
+    explanation: "Use the definition expected by your course specification."
+  }],
+  "sociology:Crime and deviance": [{
+    q: "What is deviance?",
+    answer: ["behaviour that breaks social norms", "breaking social norms", "behaviour that violates social norms"],
+    hints: ["Consider norms rather than only criminal law.", "Deviance is defined in relation to social expectations."],
+    solution: "Behaviour that violates social norms.",
+    explanation: "Deviance is socially defined and varies across cultures and time."
+  }],
+  "sociology:Research methods": [{
+    q: "What is a strength of using structured interviews?",
+    answer: ["standardised comparable answers", "answers are comparable", "standardised questions"],
+    hints: ["Every participant is asked the same planned questions.", "This can make answers easier to compare."],
+    solution: "Standardised questions make responses easier to compare.",
+    explanation: "Structured interviews can improve reliability but limit depth."
+  }],
+  "sociology:Theory": [{
+    q: "What do sociologists mean by a social institution?",
+    answer: ["established social structure meeting social needs", "established social structure", "social structure"],
+    hints: ["Examples include family, education and religion.", "Institutions organise important areas of social life."],
+    solution: "An established structure or system that organises social life, such as education or family.",
+    explanation: "Institutions shape roles, norms and relationships."
+  }],
+  "maths:Algebra and functions": [ 
+    { 
+      q: "Solve 2x + 7 = 19.", 
+      answer: ["6", "x=6", "x = 6"], 
+      hints: [ 
+        "Topic: solving a linear equation.", 
+        "Subtract 7 from both sides.", 
+        "You will have 2x = 12. Now divide by 2." 
+      ], 
+      solution: "2x + 7 = 19\n2x = 12\nx = 6", 
+      explanation: "Use inverse operations to isolate x." 
+    } 
+  ],
+  "maths:Coordinate geometry": [ 
+    { 
+      q: "Find the gradient of the line through (2, 3) and (6, 11).", 
+      answer: ["2", "m=2", "m = 2"], 
+      hints: [ 
+        "Topic: gradient between two points.", 
+        "Use gradient = change in y ÷ change in x.", 
+        "Calculate (11 − 3) ÷ (6 − 2)." 
+      ], 
+      solution: "Gradient = (11 − 3) / (6 − 2) = 8 / 4 = 2.", 
+      explanation: "Gradient measures vertical change divided by horizontal change." 
+    } 
+  ],
+  "maths:Sequences and series": [ 
+    { 
+      q: "Find the 10th term of the arithmetic sequence 4, 7, 10, 13, …", 
+      answer: ["31"], 
+      hints: [ 
+        "Topic: arithmetic sequences.", 
+        "The first term is 4 and the common difference is 3.", 
+        "Use uₙ = a + (n − 1)d." 
+      ], 
+      solution: "u₁₀ = 4 + (10 − 1) × 3 = 4 + 27 = 31.", 
+      explanation: "There are nine increases of 3 between the first and tenth terms." 
+    } 
+  ],
+  "maths:Trigonometry": [ 
+    { 
+      q: "Solve sin(x) = 0.5 for 0° ≤ x ≤ 180°.", 
+      answer: ["30,150", "30°,150°", "30 and 150", "150,30"], 
+      hints: [ 
+        "Topic: solving trigonometric equations.", 
+        "Find the principal angle using inverse sine.", 
+        "Sine is positive in quadrants I and II." 
+      ], 
+      solution: "x = 30° or x = 150°.", 
+      explanation: "The second solution is 180° − 30°." 
+    } 
+  ],
+  "maths:Differentiation": [ 
+    { 
+      q: "Differentiate y = 3x² + 4x − 7.", 
+      answer: ["6x+4", "6x + 4", "dy/dx=6x+4"], 
+      hints: [ 
+        "Topic: differentiating powers of x.", 
+        "Multiply each coefficient by its power.", 
+        "Reduce each power by one; the derivative of a constant is zero." 
+      ], 
+      solution: "dy/dx = 6x + 4.", 
+      explanation: "Differentiate each term separately." 
+    } 
+  ],
+  "maths:Integration": [ 
+    { 
+      q: "Find ∫(6x + 4) dx.", 
+      answer: ["3x^2+4x+c", "3x²+4x+c", "3x^2 + 4x + c"], 
+      hints: [ 
+        "Topic: indefinite integration.", 
+        "Increase each power by one.", 
+        "Divide each coefficient by the new power and include + C." 
+      ], 
+      solution: "∫(6x + 4) dx = 3x² + 4x + C.", 
+      explanation: "Differentiate your result to check it." 
+    } 
+  ],
+  "maths:Numerical methods": [ 
+    { 
+      q: "One iteration of Newton–Raphson uses xₙ₊₁ = xₙ − f(xₙ)/f′(xₙ). If xₙ = 2, f(2) = 3 and f′(2) = 4, find xₙ₊₁.", 
+      answer: ["1.25", "5/4", "1.250"], 
+      hints: [ 
+        "Topic: Newton–Raphson iteration.", 
+        "Substitute the values into the iteration formula.", 
+        "Calculate 2 − 3/4." 
+      ], 
+      solution: "xₙ₊₁ = 2 − 3/4 = 1.25.", 
+      explanation: "The new estimate is the old estimate minus f(x)/f′(x)." 
+    } 
+  ],
+  "maths:Vectors": [ 
+    { 
+      q: "Given a = (2, 3) and b = (4, −1), find a + b.", 
+      answer: ["(6,2)", "(6, 2)"], 
+      hints: [ 
+        "Topic: adding vectors.", 
+        "Add corresponding components.", 
+        "Calculate (2 + 4, 3 + (−1))." 
+      ], 
+      solution: "a + b = (6, 2).", 
+      explanation: "Add the horizontal components and the vertical components separately." 
+    } 
+  ],
+  "maths:Probability": [ 
+    { 
+      q: "A fair six-sided die is rolled once. Find the probability of rolling an even number.", 
+      answer: ["1/2", "0.5", "0.50"], 
+      hints: [ 
+        "Topic: equally likely outcomes.", 
+        "List the even outcomes.", 
+        "There are three favourable outcomes out of six." 
+      ], 
+      solution: "P(even) = 3/6 = 1/2.", 
+      explanation: "Probability = favourable outcomes ÷ total equally likely outcomes." 
+    } 
+  ],
+  "maths:Kinematics": [ 
+    { 
+      q: "A particle has constant acceleration 3 m s⁻². Its initial velocity is 4 m s⁻¹. Find its velocity after 5 seconds.", 
+      answer: ["19", "19m/s", "19 m/s"], 
+      hints: [ 
+        "Topic: constant-acceleration equations.", 
+        "Use v = u + at.", 
+        "Substitute u = 4, a = 3 and t = 5." 
+      ], 
+      solution: "v = 4 + 3 × 5 = 19 m s⁻¹.", 
+      explanation: "The velocity increases by 3 m s⁻¹ each second." 
+    } 
+  ],
+};
+
+const supplementalQuestionBank = {
+  "maths:Algebra and functions": [
+    {
+      "q": "Solve 2x² − 5x − 3 = 0.",
+      "answer": [
+        "3",
+        "−0.5",
+        "-0.5",
+        "x=3 or x=-0.5",
+        "x = 3 or x = −0.5"
+      ],
+      "hints": [
+        "Look for two numbers that multiply to −6 and add to −5 after factoring out 2.",
+        "Factorise: (2x + 1)(x − 3) = 0."
+      ],
+      "solution": "x = 3 or x = −1/2.",
+      "explanation": "Set each factor equal to zero."
+    }
+  ],
+  "maths:Coordinate geometry": [
+    {
+      "q": "Find the gradient of the line through (2, 3) and (6, 11).",
+      "answer": [
+        "2",
+        "gradient 2",
+        "m=2"
+      ],
+      "hints": [
+        "Use change in y divided by change in x.",
+        "(11 − 3)/(6 − 2) = 8/4 = 2."
+      ],
+      "solution": "The gradient is 2.",
+      "explanation": "Gradient measures vertical change per unit of horizontal change."
+    }
+  ],
+  "maths:Sequences and series": [
+    {
+      "q": "Find the 10th term of the arithmetic sequence 7, 11, 15, 19, …",
+      "answer": [
+        "43",
+        "43."
+      ],
+      "hints": [
+        "The common difference is 4.",
+        "Use uₙ = a + (n − 1)d."
+      ],
+      "solution": "u₁₀ = 7 + 9(4) = 43.",
+      "explanation": "Substitute the first term and common difference."
+    }
+  ],
+  "maths:Trigonometry": [
+    {
+      "q": "Solve sin θ = 0.5 for 0° ≤ θ ≤ 360°.",
+      "answer": [
+        "30,150",
+        "30 and 150",
+        "30°,150°",
+        "30 and 150 degrees"
+      ],
+      "hints": [
+        "Find the principal angle, then use the symmetry of sine.",
+        "The reference angle is 30°; sine is positive in quadrants I and II."
+      ],
+      "solution": "θ = 30° or 150°.",
+      "explanation": "Both angles have sine 0.5 in the given interval."
+    }
+  ],
+  "maths:Differentiation": [
+    {
+      "q": "Differentiate y = 4x³ − 6x + 2.",
+      "answer": [
+        "12x^2-6",
+        "12x²-6",
+        "12x^2 − 6"
+      ],
+      "hints": [
+        "Apply the power rule term by term.",
+        "4x³ becomes 12x²; −6x becomes −6."
+      ],
+      "solution": "dy/dx = 12x² − 6.",
+      "explanation": "The derivative of a constant is zero."
+    }
+  ],
+  "maths:Integration": [
+    {
+      "q": "Find ∫(6x² + 4) dx.",
+      "answer": [
+        "2x^3+4x+c",
+        "2x³ + 4x + c",
+        "2x^3+4x"
+      ],
+      "hints": [
+        "Increase each power by one and divide by the new power.",
+        "∫6x² dx = 2x³ and ∫4 dx = 4x."
+      ],
+      "solution": "∫(6x² + 4) dx = 2x³ + 4x + C.",
+      "explanation": "Include the constant of integration."
+    }
+  ],
+  "maths:Numerical methods": [
+    {
+      "q": "One iteration of xₙ₊₁ = √(5 + xₙ) starts at x₀ = 4. Find x₁.",
+      "answer": [
+        "3",
+        "3.0"
+      ],
+      "hints": [
+        "Substitute x₀ = 4 into the iteration formula.",
+        "x₁ = √(5 + 4)."
+      ],
+      "solution": "x₁ = √9 = 3.",
+      "explanation": "Use the previous value, not the unknown root."
+    }
+  ],
+  "maths:Vectors": [
+    {
+      "q": "If a = (2, −1) and b = (3, 4), find 2a + b.",
+      "answer": [
+        "7,2",
+        "(7,2)",
+        "7, 2"
+      ],
+      "hints": [
+        "Multiply each component of a by 2, then add corresponding components.",
+        "2a = (4, −2); add (3, 4)."
+      ],
+      "solution": "2a + b = (7, 2).",
+      "explanation": "Vector addition is component-wise."
+    }
+  ],
+  "maths:Probability": [
+    {
+      "q": "A fair six-sided die is rolled. Find P(score greater than 4).",
+      "answer": [
+        "1/3",
+        "0.333",
+        "2/6"
+      ],
+      "hints": [
+        "The successful outcomes are 5 and 6.",
+        "There are 2 successful outcomes out of 6 equally likely outcomes."
+      ],
+      "solution": "P = 2/6 = 1/3.",
+      "explanation": "Probability is favourable outcomes divided by total outcomes."
+    }
+  ],
+  "maths:Kinematics": [
+    {
+      "q": "A particle has velocity v = 3t² − 4. Find its acceleration at t = 2.",
+      "answer": [
+        "12",
+        "12m/s^2",
+        "12 m/s²"
+      ],
+      "hints": [
+        "Acceleration is dv/dt.",
+        "Differentiate to get a = 6t, then substitute t = 2."
+      ],
+      "solution": "a = 6(2) = 12 m s⁻².",
+      "explanation": "Acceleration is the rate of change of velocity."
+    }
+  ],
+  "further:Complex numbers": [
+    {
+      "q": "Calculate (2 + 3i)(1 − i) in the form a + bi.",
+      "answer": [
+        "5+i",
+        "5 + i",
+        "5+i."
+      ],
+      "hints": [
+        "Expand the brackets and use i² = −1.",
+        "2 − 2i + 3i − 3i² = 2 + i + 3."
+      ],
+      "solution": "The result is 5 + i.",
+      "explanation": "Remember that i² equals −1."
+    }
+  ],
+  "further:Matrices": [
+    {
+      "q": "For A = [[2, 1], [5, 3]], find det(A).",
+      "answer": [
+        "1",
+        "1."
+      ],
+      "hints": [
+        "Use ad − bc.",
+        "det(A) = 2(3) − 1(5)."
+      ],
+      "solution": "det(A) = 6 − 5 = 1.",
+      "explanation": "For a 2 × 2 matrix, determinant is ad − bc."
+    }
+  ],
+  "further:Further calculus": [
+    {
+      "q": "Differentiate y = e^(2x).",
+      "answer": [
+        "2e^(2x)",
+        "2e^2x",
+        "2e^(2x)."
+      ],
+      "hints": [
+        "Use the chain rule.",
+        "Differentiate the exponent 2x and multiply by e^(2x)."
+      ],
+      "solution": "dy/dx = 2e^(2x).",
+      "explanation": "The derivative of eᵘ is eᵘ times du/dx."
+    }
+  ],
+  "further:Proof": [
+    {
+      "q": "State the contrapositive of: if n is divisible by 4, then n is even.",
+      "answer": [
+        "if n is odd then n is not divisible by 4",
+        "if n is not even then n is not divisible by 4",
+        "not even implies not divisible by 4"
+      ],
+      "hints": [
+        "The contrapositive negates and reverses the two statements.",
+        "Negate 'n is even' to 'n is not even', and reverse the implication."
+      ],
+      "solution": "If n is not even, then n is not divisible by 4.",
+      "explanation": "A statement and its contrapositive are logically equivalent."
+    }
+  ],
+  "further:Further mechanics": [
+    {
+      "q": "A 3 kg particle is pulled by a resultant force of 15 N. Find its acceleration.",
+      "answer": [
+        "5",
+        "5m/s^2",
+        "5 m/s²"
+      ],
+      "hints": [
+        "Use F = ma and rearrange for a.",
+        "a = F/m = 15/3."
+      ],
+      "solution": "a = 5 m s⁻².",
+      "explanation": "Acceleration equals resultant force divided by mass."
+    }
+  ],
+  "dt:Design requirements": [
+    {
+      "q": "A client says a chair must be 'comfortable'. Give one way to make this requirement testable.",
+      "answer": [
+        "user trial with comfort rating",
+        "comfort rating from user trials",
+        "test with users and rating",
+        "user testing"
+      ],
+      "hints": [
+        "Turn the subjective word into an observable test or measurement.",
+        "For example, ask a sample of users to rate comfort after a set period."
+      ],
+      "solution": "Use a defined user trial and a recorded comfort rating.",
+      "explanation": "A testable criterion needs a method and measurable evidence."
+    }
+  ],
+  "dt:Materials": [
+    {
+      "q": "Why is plywood often suitable for a lightweight panel product?",
+      "answer": [
+        "strong for its mass",
+        "good strength to weight ratio",
+        "strength to weight"
+      ],
+      "hints": [
+        "Think about stiffness, strength and mass.",
+        "Cross-laminated veneers help reduce directional weakness."
+      ],
+      "solution": "Plywood can offer a useful strength-to-weight ratio and dimensional stability.",
+      "explanation": "Link the property to the product's function."
+    }
+  ],
+  "dt:Manufacturing": [
+    {
+      "q": "Name a suitable process for making many identical metal brackets from sheet metal.",
+      "answer": [
+        "stamping",
+        "pressing",
+        "press forming",
+        "blanking"
+      ],
+      "hints": [
+        "Consider a repeatable process for sheet stock at volume.",
+        "A press tool can cut and form the sheet in a cycle."
+      ],
+      "solution": "Pressing/stamping is suitable for high-volume sheet-metal brackets.",
+      "explanation": "Process choice depends on material, geometry and batch size."
+    }
+  ],
+  "dt:Sustainability": [
+    {
+      "q": "What is one advantage of designing a product so its battery can be replaced?",
+      "answer": [
+        "extends product life",
+        "easier repair",
+        "reduces waste",
+        "repair rather than replace"
+      ],
+      "hints": [
+        "Consider repair, service life and discarded products.",
+        "A failed battery need not make the whole product unusable."
+      ],
+      "solution": "A replaceable battery extends product life and can reduce electronic waste.",
+      "explanation": "Design for repair can reduce whole-product replacement."
+    }
+  ],
+  "dt:Evaluation": [
+    {
+      "q": "A prototype fails a drop test. What should the designer do next?",
+      "answer": [
+        "analyse failure and modify design",
+        "identify failure and redesign",
+        "modify and retest"
+      ],
+      "hints": [
+        "Use test evidence rather than guessing.",
+        "Identify the failure point, change the design and repeat the test."
+      ],
+      "solution": "Analyse the failure, modify the design and retest against the criterion.",
+      "explanation": "Evaluation should lead to evidence-based iteration."
+    }
+  ],
+  "dt:Exam answers": [
+    {
+      "q": "In a 6-mark design question, what should a developed point include?",
+      "answer": [
+        "point explanation context",
+        "point, explanation and context",
+        "specific point and link to context"
+      ],
+      "hints": [
+        "A named point alone is rarely enough for a developed response.",
+        "Explain why it matters and apply it to the product or scenario."
+      ],
+      "solution": "Make a clear point, explain the effect and link it to the given context.",
+      "explanation": "Contextual application makes the answer specific."
+    }
+  ],
+  "business:Finance": [
+    {
+      "q": "A product sells for £20 and has variable cost £8 per unit. Find contribution per unit.",
+      "answer": [
+        "12",
+        "£12",
+        "12 pounds"
+      ],
+      "hints": [
+        "Contribution per unit = selling price − variable cost per unit.",
+        "£20 − £8 = £12."
+      ],
+      "solution": "Contribution is £12 per unit.",
+      "explanation": "Contribution contributes towards fixed costs and then profit."
+    }
+  ],
+  "business:Marketing": [
+    {
+      "q": "What is a USP?",
+      "answer": [
+        "unique selling point",
+        "unique selling proposition"
+      ],
+      "hints": [
+        "It is the feature or benefit that differentiates an offer.",
+        "Think of the reason a customer might choose this product over competitors."
+      ],
+      "solution": "USP means unique selling point/proposition.",
+      "explanation": "A USP differentiates a product from competitors."
+    }
+  ],
+  "business:Operations": [
+    {
+      "q": "What is meant by just-in-time stock control?",
+      "answer": [
+        "stock arrives when needed",
+        "minimise stock held and receive when needed",
+        "receive stock as needed"
+      ],
+      "hints": [
+        "It aims to avoid holding large amounts of inventory.",
+        "Deliveries are timed to match production or demand."
+      ],
+      "solution": "Stock is delivered as it is needed, reducing inventory held.",
+      "explanation": "JIT can reduce storage costs but increases supply disruption risk."
+    }
+  ],
+  "business:Human resources": [
+    {
+      "q": "What is labour turnover?",
+      "answer": [
+        "percentage of workforce leaving",
+        "rate employees leave",
+        "proportion of staff leaving"
+      ],
+      "hints": [
+        "It measures staff departures over a period.",
+        "Usually expressed as leavers divided by average workforce × 100."
+      ],
+      "solution": "Labour turnover is the proportion/percentage of employees who leave over a period.",
+      "explanation": "High turnover may increase recruitment and training costs."
+    }
+  ],
+  "business:Business strategy": [
+    {
+      "q": "What is meant by competitive advantage?",
+      "answer": [
+        "advantage over competitors",
+        "something that makes a business more competitive",
+        "offers greater value than competitors"
+      ],
+      "hints": [
+        "Think of a feature that lets a business outperform rivals.",
+        "It may come from cost, quality, brand, service or innovation."
+      ],
+      "solution": "A competitive advantage is a factor that enables a business to outperform rivals.",
+      "explanation": "It should be relevant to customers or costs."
+    }
+  ],
+  "physics:Mechanics": [
+    {
+      "q": "A 2 kg object speeds up from 3 m/s to 11 m/s in 4 s. Find its acceleration.",
+      "answer": [
+        "2",
+        "2m/s^2",
+        "2 m/s²"
+      ],
+      "hints": [
+        "Acceleration = change in velocity ÷ time.",
+        "(11 − 3)/4 = 8/4."
+      ],
+      "solution": "Acceleration = 2 m s⁻².",
+      "explanation": "Use final velocity minus initial velocity."
+    }
+  ],
+  "physics:Electricity": [
+    {
+      "q": "A 6 Ω resistor carries a current of 2 A. Calculate the potential difference.",
+      "answer": [
+        "12",
+        "12v",
+        "12 V"
+      ],
+      "hints": [
+        "Use V = IR.",
+        "V = 2 × 6."
+      ],
+      "solution": "V = 12 V.",
+      "explanation": "Ohm's law links potential difference, current and resistance."
+    }
+  ],
+  "physics:Waves": [
+    {
+      "q": "A wave travels at 340 m/s and has frequency 170 Hz. Find its wavelength.",
+      "answer": [
+        "2",
+        "2m",
+        "2 m"
+      ],
+      "hints": [
+        "Use v = fλ and rearrange.",
+        "λ = v/f = 340/170."
+      ],
+      "solution": "Wavelength = 2 m.",
+      "explanation": "Keep units consistent."
+    }
+  ],
+  "physics:Fields": [
+    {
+      "q": "What happens to gravitational field strength as distance from a spherical planet increases?",
+      "answer": [
+        "decreases",
+        "gets weaker",
+        "falls"
+      ],
+      "hints": [
+        "Consider the inverse-square relationship outside the planet.",
+        "Field strength is proportional to 1/r²."
+      ],
+      "solution": "It decreases with increasing distance.",
+      "explanation": "For a spherical mass, g falls with the square of distance from its centre."
+    }
+  ],
+  "physics:Nuclear physics": [
+    {
+      "q": "In beta-minus decay, what happens to the proton number?",
+      "answer": [
+        "increases by 1",
+        "increases",
+        "+1"
+      ],
+      "hints": [
+        "A neutron changes into a proton, electron and antineutrino.",
+        "The nucleus gains one proton while nucleon number stays the same."
+      ],
+      "solution": "Proton number increases by 1; nucleon number is unchanged.",
+      "explanation": "Beta-minus decay changes a neutron into a proton."
+    }
+  ],
+  "physics:Practical skills": [
+    {
+      "q": "Why plot a graph using a line of best fit rather than joining every point?",
+      "answer": [
+        "shows overall trend",
+        "reveals relationship and anomalies",
+        "overall relationship"
+      ],
+      "hints": [
+        "Measurements include uncertainty and random variation.",
+        "A best-fit line represents the general relationship."
+      ],
+      "solution": "It shows the overall trend and helps identify anomalous points.",
+      "explanation": "A graph should represent the pattern, not random measurement noise."
+    }
+  ],
+  "chemistry:Atomic structure": [
+    {
+      "q": "How many electrons are in a neutral atom with atomic number 17?",
+      "answer": [
+        "17",
+        "seventeen"
+      ],
+      "hints": [
+        "A neutral atom has equal numbers of protons and electrons.",
+        "Atomic number is the proton number."
+      ],
+      "solution": "It has 17 electrons.",
+      "explanation": "Neutrality means total positive and negative charge balance."
+    }
+  ],
+  "chemistry:Bonding": [
+    {
+      "q": "Explain why ionic compounds conduct electricity when molten but not when solid.",
+      "answer": [
+        "ions mobile when molten but fixed in solid",
+        "ions can move when molten",
+        "mobile ions"
+      ],
+      "hints": [
+        "Conduction requires charged particles that can move.",
+        "In solids, ions are held in a lattice; melting frees them to move."
+      ],
+      "solution": "Molten ionic compounds conduct because ions are mobile; in solids the ions are fixed in place.",
+      "explanation": "Mobile ions carry charge."
+    }
+  ],
+  "chemistry:Amount of substance": [
+    {
+      "q": "Calculate moles in 5.85 g of NaCl, Mr = 58.5.",
+      "answer": [
+        "0.1",
+        "0.10",
+        "0.1 mol"
+      ],
+      "hints": [
+        "Use n = m/Mr.",
+        "5.85 ÷ 58.5 = 0.10."
+      ],
+      "solution": "Amount = 0.100 mol (3 s.f.).",
+      "explanation": "Divide mass by molar mass."
+    }
+  ],
+  "chemistry:Organic chemistry": [
+    {
+      "q": "What type of reaction converts an alkene into an alkane using hydrogen?",
+      "answer": [
+        "addition",
+        "hydrogenation",
+        "addition reaction"
+      ],
+      "hints": [
+        "Hydrogen adds across the carbon-carbon double bond.",
+        "The double bond becomes a single bond as H atoms add."
+      ],
+      "solution": "It is an addition reaction called hydrogenation.",
+      "explanation": "The reaction typically uses a nickel catalyst."
+    }
+  ],
+  "chemistry:Equilibria": [
+    {
+      "q": "For an exothermic forward reaction, what happens to the equilibrium position when temperature increases?",
+      "answer": [
+        "shifts to reactants",
+        "towards reactants",
+        "left"
+      ],
+      "hints": [
+        "Treat heat as a product for an exothermic forward reaction.",
+        "Increasing temperature favours the endothermic direction."
+      ],
+      "solution": "Equilibrium shifts towards the reactants.",
+      "explanation": "The system opposes the temperature increase by favouring the reverse, endothermic reaction."
+    }
+  ],
+  "biology:Cells": [
+    {
+      "q": "What is the role of the ribosome?",
+      "answer": [
+        "protein synthesis",
+        "makes proteins",
+        "synthesises proteins"
+      ],
+      "hints": [
+        "Think about where amino acids are joined.",
+        "Ribosomes translate the information carried by mRNA."
+      ],
+      "solution": "Ribosomes are the site of protein synthesis.",
+      "explanation": "They assemble amino acids into polypeptides."
+    }
+  ],
+  "biology:Exchange": [
+    {
+      "q": "How does a large surface-area-to-volume ratio help an organism?",
+      "answer": [
+        "faster exchange",
+        "increases rate of diffusion",
+        "more efficient exchange"
+      ],
+      "hints": [
+        "Exchange occurs across a surface but demand depends on volume.",
+        "More surface is available per unit volume."
+      ],
+      "solution": "It allows faster/more efficient exchange of substances relative to the organism's needs.",
+      "explanation": "A large ratio supports diffusion and exchange."
+    }
+  ],
+  "biology:Genetics": [
+    {
+      "q": "During meiosis, what is the chromosome number of daughter cells compared with the parent cell?",
+      "answer": [
+        "half",
+        "half the chromosome number",
+        "haploid"
+      ],
+      "hints": [
+        "Meiosis produces gametes.",
+        "It reduces diploid cells to haploid cells."
+      ],
+      "solution": "Daughter cells have half the parent chromosome number.",
+      "explanation": "This helps restore the diploid number at fertilisation."
+    }
+  ],
+  "biology:Homeostasis": [
+    {
+      "q": "Which hormone lowers blood glucose concentration?",
+      "answer": [
+        "insulin"
+      ],
+      "hints": [
+        "It is released by pancreatic beta cells.",
+        "It promotes glucose uptake and conversion to glycogen."
+      ],
+      "solution": "Insulin lowers blood glucose concentration.",
+      "explanation": "Glucagon has the opposite overall effect."
+    }
+  ],
+  "biology:Ecology": [
+    {
+      "q": "What is the term for all the populations of different species in an area?",
+      "answer": [
+        "community",
+        "a community"
+      ],
+      "hints": [
+        "It includes different species, not the non-living environment.",
+        "An ecosystem includes the community plus abiotic factors."
+      ],
+      "solution": "A community is all populations of different species in an area.",
+      "explanation": "Keep community and ecosystem distinct."
+    }
+  ],
+  "computer:Algorithms": [
+    {
+      "q": "What is the time complexity of a single loop that runs n times with constant work each iteration?",
+      "answer": [
+        "o(n)",
+        "on",
+        "linear",
+        "linear time"
+      ],
+      "hints": [
+        "Count how the work grows when n doubles.",
+        "The number of operations grows proportionally to n."
+      ],
+      "solution": "Its time complexity is O(n), linear time.",
+      "explanation": "Big-O describes growth rate as input size increases."
+    }
+  ],
+  "computer:Programming": [
+    {
+      "q": "What is the purpose of validation in data entry?",
+      "answer": [
+        "check data is reasonable and in allowed format",
+        "check input meets rules",
+        "ensures data follows rules"
+      ],
+      "hints": [
+        "Validation checks input against rules; it does not prove it is true.",
+        "Examples include range, length and presence checks."
+      ],
+      "solution": "Validation checks that input meets specified rules or constraints.",
+      "explanation": "Validation differs from verification, which checks accurate copying."
+    }
+  ],
+  "computer:Data structures": [
+    {
+      "q": "Which data structure uses last-in, first-out order?",
+      "answer": [
+        "stack",
+        "a stack"
+      ],
+      "hints": [
+        "Think of a pile where the latest item is removed first.",
+        "Push adds an item and pop removes the top item."
+      ],
+      "solution": "A stack uses last-in, first-out (LIFO).",
+      "explanation": "Stacks are used in call stacks and undo operations."
+    }
+  ],
+  "computer:Networks": [
+    {
+      "q": "What does IP stand for in IP address?",
+      "answer": [
+        "internet protocol",
+        "internet protocol."
+      ],
+      "hints": [
+        "It is the protocol used for addressing and routing packets.",
+        "The abbreviation has two words."
+      ],
+      "solution": "Internet Protocol.",
+      "explanation": "IP addresses identify network interfaces for communication."
+    }
+  ],
+  "computer:Systems": [
+    {
+      "q": "What is the role of an operating system?",
+      "answer": [
+        "manage hardware and software resources",
+        "manages hardware and software",
+        "manage resources"
+      ],
+      "hints": [
+        "Consider memory, processes, files and peripherals.",
+        "The OS coordinates resources and provides services to applications."
+      ],
+      "solution": "To manage hardware and software resources and provide services to applications.",
+      "explanation": "Operating systems coordinate a computer's resources."
+    }
+  ],
+  "english:Close analysis": [
+    {
+      "q": "What is the effect of using a semantic field in a text?",
+      "answer": [
+        "creates a pattern of related meanings",
+        "builds a pattern of related words",
+        "reinforces an idea or mood"
+      ],
+      "hints": [
+        "Look at several words linked by one topic or idea.",
+        "Explain the pattern and what it suggests to the reader."
+      ],
+      "solution": "A semantic field groups related words to reinforce an idea, mood or theme.",
+      "explanation": "Analyse the pattern and its contextual effect, not just the label."
+    }
+  ],
+  "english:Essay planning": [
+    {
+      "q": "What should a strong analytical paragraph do after making a point?",
+      "answer": [
+        "use evidence and analyse it",
+        "evidence analysis link to question",
+        "analyse evidence"
+      ],
+      "hints": [
+        "A quotation alone does not explain its significance.",
+        "Select evidence, analyse a method and link back to the argument."
+      ],
+      "solution": "Support the point with evidence, analyse its effect and link to the question.",
+      "explanation": "A paragraph should develop a line of argument."
+    }
+  ],
+  "english:Language": [
+    {
+      "q": "What is personification?",
+      "answer": [
+        "giving human qualities to non-human things",
+        "human qualities to nonhuman things"
+      ],
+      "hints": [
+        "It attributes a human action or feeling to something non-human.",
+        "For example, 'the wind whispered'."
+      ],
+      "solution": "Personification gives human qualities or actions to non-human things.",
+      "explanation": "Explain the effect in context."
+    }
+  ],
+  "english:Structure": [
+    {
+      "q": "What is one effect of beginning a narrative in medias res?",
+      "answer": [
+        "starts in the middle of the action",
+        "creates immediate tension",
+        "starts mid action"
+      ],
+      "hints": [
+        "The reader enters after events have already begun.",
+        "It can create urgency and questions about what led to the moment."
+      ],
+      "solution": "In medias res begins in the middle of the action, often creating immediate intrigue.",
+      "explanation": "Link structural choice to reader response."
+    }
+  ],
+  "english:Context": [
+    {
+      "q": "In literary analysis, what does context refer to?",
+      "answer": [
+        "relevant historical social and cultural circumstances",
+        "historical social and cultural circumstances",
+        "social historical context"
+      ],
+      "hints": [
+        "Consider when and where the text was produced and relevant ideas.",
+        "Only use context that helps interpret the text."
+      ],
+      "solution": "Context is the relevant historical, social and cultural circumstances surrounding a text.",
+      "explanation": "Context should support interpretation rather than replace close analysis."
+    }
+  ],
+  "history:Causes": [
+    {
+      "q": "What is meant by a long-term cause of a historical event?",
+      "answer": [
+        "a factor that develops over time",
+        "factor operating over a long period",
+        "underlying cause"
+      ],
+      "hints": [
+        "Contrast it with an immediate trigger.",
+        "It creates conditions that make an event more likely over time."
+      ],
+      "solution": "A long-term cause develops over an extended period and helps create the conditions for an event.",
+      "explanation": "Distinguish underlying causes from triggers."
+    }
+  ],
+  "history:Consequences": [
+    {
+      "q": "What is one way to judge the significance of a historical consequence?",
+      "answer": [
+        "scale duration and affected groups",
+        "consider scale duration and reach",
+        "how many people affected and how long"
+      ],
+      "hints": [
+        "Think about how widespread and lasting the effect was.",
+        "Consider scale, duration and which groups were affected."
+      ],
+      "solution": "Assess its scale, duration and reach across different groups.",
+      "explanation": "Significance requires a criterion, not just a description."
+    }
+  ],
+  "history:Change and continuity": [
+    {
+      "q": "What does continuity mean in a historical argument?",
+      "answer": [
+        "something that stays similar over time",
+        "features that remain unchanged",
+        "stays the same"
+      ],
+      "hints": [
+        "It is the opposite of change.",
+        "Identify what persisted despite developments."
+      ],
+      "solution": "Continuity is an aspect that remains similar over a period of time.",
+      "explanation": "Compare periods to establish both change and continuity."
+    }
+  ],
+  "history:Sources": [
+    {
+      "q": "What should you consider when evaluating a historical source's provenance?",
+      "answer": [
+        "origin purpose audience and context",
+        "origin purpose audience context",
+        "who created it and why"
+      ],
+      "hints": [
+        "Consider who produced it, when, and for whom.",
+        "Provenance helps assess perspective and usefulness."
+      ],
+      "solution": "Evaluate the source's origin, purpose, audience and historical context.",
+      "explanation": "Provenance matters in relation to the specific enquiry."
+    }
+  ],
+  "history:Interpretations": [
+    {
+      "q": "Why might two historians reach different interpretations of the same event?",
+      "answer": [
+        "different evidence perspectives or questions",
+        "different evidence and perspectives",
+        "different interpretations of evidence"
+      ],
+      "hints": [
+        "They may prioritise different evidence or ask different questions.",
+        "Their contexts and methods can influence emphasis."
+      ],
+      "solution": "Historians may use different evidence, perspectives, methods or questions.",
+      "explanation": "Explain the basis for the difference using evidence."
+    }
+  ],
+  "geography:Physical processes": [
+    {
+      "q": "What causes longshore drift?",
+      "answer": [
+        "waves approach at an angle and swash moves sediment up beach while backwash returns",
+        "angled waves move sediment along coast",
+        "swash at angle and backwash straight down"
+      ],
+      "hints": [
+        "Compare the direction of swash and backwash.",
+        "Swash follows the prevailing wave direction; backwash moves downslope."
+      ],
+      "solution": "Angled swash and downslope backwash move sediment along the coastline.",
+      "explanation": "The net movement is parallel to the shore."
+    }
+  ],
+  "geography:Human geography": [
+    {
+      "q": "What is urbanisation?",
+      "answer": [
+        "increasing proportion of people living in urban areas",
+        "growth in proportion of urban population",
+        "people moving to cities"
+      ],
+      "hints": [
+        "It describes a change in the share of population living in towns and cities.",
+        "It can result from rural-urban migration and natural increase."
+      ],
+      "solution": "Urbanisation is an increasing proportion of a population living in urban areas.",
+      "explanation": "It is not simply the physical growth of one city."
+    }
+  ],
+  "geography:Fieldwork": [
+    {
+      "q": "Why use a systematic sampling method in fieldwork?",
+      "answer": [
+        "reduces selection bias",
+        "makes sampling more consistent",
+        "consistent and less biased"
+      ],
+      "hints": [
+        "Think about whether the researcher chooses only convenient locations.",
+        "A fixed interval or rule makes site selection more consistent."
+      ],
+      "solution": "Systematic sampling makes selection more consistent and can reduce selection bias.",
+      "explanation": "Sampling method affects representativeness."
+    }
+  ],
+  "geography:Case studies": [
+    {
+      "q": "What makes a case-study example effective in a 6-mark answer?",
+      "answer": [
+        "specific place facts and linked explanation",
+        "place-specific evidence linked to question",
+        "specific facts and explanation"
+      ],
+      "hints": [
+        "Avoid generic statements that could apply anywhere.",
+        "Use located facts, data or named strategies and explain their relevance."
+      ],
+      "solution": "Use specific place-based evidence and explain how it supports the argument.",
+      "explanation": "Accurate detail plus application is stronger than a place name alone."
+    }
+  ],
+  "geography:Data skills": [
+    {
+      "q": "What does a positive correlation on a scatter graph show?",
+      "answer": [
+        "as one variable increases the other tends to increase",
+        "both variables tend to increase together",
+        "variables increase together"
+      ],
+      "hints": [
+        "Look at the overall direction of the plotted points.",
+        "Positive correlation does not by itself prove causation."
+      ],
+      "solution": "As one variable increases, the other tends to increase too.",
+      "explanation": "Correlation describes association, not necessarily cause."
+    }
+  ],
+  "economics:Supply and demand": [
+    {
+      "q": "If demand increases while supply stays constant, what happens to equilibrium price?",
+      "answer": [
+        "increases",
+        "rises",
+        "goes up"
+      ],
+      "hints": [
+        "A rightward shift in demand creates excess demand at the old price.",
+        "Price rises until quantity demanded equals quantity supplied."
+      ],
+      "solution": "Equilibrium price rises (and equilibrium quantity rises).",
+      "explanation": "Assume other factors remain constant."
+    }
+  ],
+  "economics:Market failure": [
+    {
+      "q": "What is a negative externality of production?",
+      "answer": [
+        "external cost imposed on third parties",
+        "cost to third parties not reflected in price",
+        "third party cost"
+      ],
+      "hints": [
+        "Think about costs borne by people outside the transaction.",
+        "Pollution from production can harm nearby residents."
+      ],
+      "solution": "A negative production externality is a cost imposed on third parties by production.",
+      "explanation": "It can cause market output to exceed the socially optimal level."
+    }
+  ],
+  "economics:Macroeconomics": [
+    {
+      "q": "What is inflation?",
+      "answer": [
+        "sustained rise in general price level",
+        "general price level rises over time",
+        "rise in the general price level"
+      ],
+      "hints": [
+        "It concerns prices across the economy, not one product.",
+        "The increase should be sustained, not a one-off price change."
+      ],
+      "solution": "Inflation is a sustained rise in the general price level.",
+      "explanation": "It reduces the purchasing power of money if income does not keep pace."
+    }
+  ],
+  "economics:Policies": [
+    {
+      "q": "What is expansionary fiscal policy?",
+      "answer": [
+        "higher government spending or lower taxes",
+        "increase spending or reduce taxes",
+        "higher spending lower taxes"
+      ],
+      "hints": [
+        "Fiscal policy uses government spending and taxation.",
+        "Both measures can increase aggregate demand."
+      ],
+      "solution": "Expansionary fiscal policy increases government spending and/or cuts taxes.",
+      "explanation": "The aim is to raise aggregate demand."
+    }
+  ],
+  "economics:Evaluation": [
+    {
+      "q": "Why might a policy's effect on unemployment depend on the economic cycle?",
+      "answer": [
+        "spare capacity and demand conditions differ",
+        "impact depends on spare capacity",
+        "depends on current economic conditions"
+      ],
+      "hints": [
+        "A policy can have different effects in recession and near full capacity.",
+        "Consider whether firms have unused capacity and whether demand is weak."
+      ],
+      "solution": "Its impact depends on spare capacity, confidence and prevailing demand conditions.",
+      "explanation": "Evaluation should explain conditions under which the policy works best."
+    }
+  ],
+  "psychology:Research methods": [
+    {
+      "q": "What is an operationalised variable?",
+      "answer": [
+        "variable defined in measurable terms",
+        "defined so it can be measured",
+        "measurable definition"
+      ],
+      "hints": [
+        "Researchers need a clear, repeatable way to measure it.",
+        "For example, define aggression as number of times a participant hits a toy."
+      ],
+      "solution": "An operationalised variable is defined in specific measurable terms.",
+      "explanation": "Operationalisation supports replication and consistency."
+    }
+  ],
+  "psychology:Memory": [
+    {
+      "q": "What is the capacity of short-term memory according to the classic Miller estimate?",
+      "answer": [
+        "7 plus or minus 2",
+        "7±2",
+        "seven plus or minus two",
+        "5 to 9 items"
+      ],
+      "hints": [
+        "Recall the classic estimate of how many chunks can be held.",
+        "It is often expressed as seven items, plus or minus two."
+      ],
+      "solution": "Miller proposed around 7 ± 2 chunks.",
+      "explanation": "This is a classic estimate; later research has suggested smaller capacities under some conditions."
+    }
+  ],
+  "psychology:Social influence": [
+    {
+      "q": "What is conformity?",
+      "answer": [
+        "changing behaviour or beliefs to match a group",
+        "matching group behaviour",
+        "yielding to group pressure"
+      ],
+      "hints": [
+        "It involves responding to real or imagined group pressure.",
+        "The change may be public behaviour or private belief."
+      ],
+      "solution": "Conformity is changing behaviour or beliefs to align with a group.",
+      "explanation": "Distinguish compliance, identification and internalisation."
+    }
+  ],
+  "psychology:Approaches": [
+    {
+      "q": "Which approach explains behaviour through observable learning and conditioning?",
+      "answer": [
+        "behaviourist",
+        "behaviourism",
+        "behavioural approach"
+      ],
+      "hints": [
+        "Focus on learning through association and consequences.",
+        "Classical and operant conditioning are central ideas."
+      ],
+      "solution": "The behaviourist approach.",
+      "explanation": "Behaviourism emphasises observable behaviour and learning processes."
+    }
+  ],
+  "psychology:Evaluation": [
+    {
+      "q": "What does it mean to evaluate a psychological study?",
+      "answer": [
+        "assess strengths limitations and implications",
+        "consider strengths and limitations",
+        "assess validity reliability and generalisability"
+      ],
+      "hints": [
+        "Evaluation goes beyond describing the procedure or result.",
+        "Consider method, sample, validity, reliability and practical implications."
+      ],
+      "solution": "Evaluate strengths, limitations and what they mean for the conclusion.",
+      "explanation": "Make a supported judgement rather than listing generic criticisms."
+    }
+  ],
+  "sociology:Education": [
+    {
+      "q": "What is one function of education according to functionalists?",
+      "answer": [
+        "socialisation",
+        "transmit shared norms and values",
+        "transmit norms and values"
+      ],
+      "hints": [
+        "Consider how schools prepare pupils for society.",
+        "Schools can transmit shared norms and values."
+      ],
+      "solution": "Socialisation: transmitting shared norms and values.",
+      "explanation": "Functionalists often view education as supporting social integration."
+    }
+  ],
+  "sociology:Families": [
+    {
+      "q": "What is meant by the nuclear family?",
+      "answer": [
+        "two parents and dependent children",
+        "parents and dependent children",
+        "parents with their children"
+      ],
+      "hints": [
+        "It is a family form often contrasted with extended family.",
+        "It usually refers to parent(s) and dependent children living as a family unit."
+      ],
+      "solution": "A nuclear family consists of parent(s) and dependent children as a family unit.",
+      "explanation": "Definitions may vary slightly by course framing."
+    }
+  ],
+  "sociology:Crime and deviance": [
+    {
+      "q": "What is meant by a social construction of crime?",
+      "answer": [
+        "crime definitions are shaped by society and power",
+        "definitions depend on social rules and power",
+        "socially defined crime"
+      ],
+      "hints": [
+        "Think about how laws and norms are made and enforced.",
+        "Actions are classified and treated differently across time and societies."
+      ],
+      "solution": "The social construction of crime means definitions and responses are shaped by social rules, values and power.",
+      "explanation": "Use examples to show that definitions can vary."
+    }
+  ],
+  "sociology:Research methods": [
+    {
+      "q": "What is a strength of using structured interviews?",
+      "answer": [
+        "standardised questions make responses comparable",
+        "same questions allow comparison",
+        "comparable data"
+      ],
+      "hints": [
+        "All participants are asked the same planned questions.",
+        "This can improve consistency and ease of comparison."
+      ],
+      "solution": "Structured interviews standardise questions, making responses easier to compare.",
+      "explanation": "A limitation can be reduced depth or flexibility."
+    }
+  ],
+  "sociology:Theory": [
+    {
+      "q": "What is the basic functionalist view of society?",
+      "answer": [
+        "society is a system of interdependent institutions",
+        "institutions work together to maintain social order",
+        "interdependent institutions"
+      ],
+      "hints": [
+        "Think of society as a system with connected parts.",
+        "Institutions are seen as contributing functions to social stability."
+      ],
+      "solution": "Functionalism sees society as a system of interdependent institutions that contribute to order and stability.",
+      "explanation": "Contrast with conflict perspectives when evaluating."
+    }
+  ]
+};
+for (const [topicKey, questions] of Object.entries(supplementalQuestionBank)) {
+  if (!questionBank[topicKey]) questionBank[topicKey] = [];
+  questionBank[topicKey].push(...questions);
+}
+
+const $ = id => document.getElementById(id); 
+let currentSubject = subjects[0]; 
+let currentQuestion = null; 
+let hintLevel = 0; 
+let stats = {}; 
+let questionOrder = 0; 
+ 
+function safeLoadStats() { 
+  try { 
+    stats = JSON.parse(localStorage.getItem("examforge-multisubject-stats") || "{}"); 
+  } catch { 
+    stats = {}; 
+  } 
+} 
+ 
+function saveStats() { 
+  try { 
+    localStorage.setItem("examforge-multisubject-stats", JSON.stringify(stats)); 
+  } catch { 
+    // Website still works if browser storage is disabled. 
+  } 
+} 
+ 
+function subjectStats() { 
+  if (!stats[currentSubject.id]) { 
+    stats[currentSubject.id] = { attempted: 0, correct: 0 }; 
+  } 
+  return stats[currentSubject.id]; 
+} 
+ 
+function updateStats() { 
+  const s = subjectStats(); 
+  $("answeredStat").textContent = s.attempted; 
+  $("correctStat").textContent = s.correct; 
+  const accuracy = s.attempted ? Math.round(s.correct / s.attempted * 100) : 0; 
+  $("accuracyStat").textContent = accuracy + "%"; 
+  $("progressFill").style.width = accuracy + "%"; 
+} 
+ 
+function buildHome() { 
+  $("subjectGrid").innerHTML = ""; 
+  subjects.forEach(subject => { 
+    const button = document.createElement("button"); 
+    button.className = "subject-card"; 
+    button.style.setProperty("--card-colour", subject.colour); 
+    button.innerHTML = ` 
+      <div class="subject-icon">${subject.icon}</div> 
+      <div class="subject-name">${subject.name}</div> 
+      <div class="subject-desc">${subject.description}</div> 
+    `; 
+    button.addEventListener("click", () => selectSubject(subject.id, true)); 
+    $("subjectGrid").appendChild(button); 
+  }); 
+} 
+ 
+function buildSubjectMenu() { 
+  $("subjectMenu").innerHTML = ""; 
+  subjects.forEach(subject => { 
+    const option = document.createElement("option"); 
+    option.value = subject.id; 
+    option.textContent = subject.name; 
+    $("subjectMenu").appendChild(option); 
+  }); 
+} 
+ 
+function selectSubject(id, openStudyView = false) { 
+  currentSubject = subjects.find(s => s.id === id) || subjects[0]; 
+ 
+  document.documentElement.style.setProperty("--theme", currentSubject.colour); 
+  document.documentElement.style.setProperty("--theme-light", currentSubject.light); 
+ 
+  $("subjectMenu").value = currentSubject.id; 
+  $("welcomeTitle").textContent = "Let's revise " + currentSubject.name + "."; 
+  $("welcomeText").textContent = currentSubject.description; 
+  $("subjectHeading").textContent = currentSubject.name; 
+  $("subjectEyebrow").textContent = currentSubject.name; 
+  $("subjectDescription").textContent = currentSubject.description; 
+ 
+  $("examBoard").innerHTML = ""; 
+  currentSubject.boards.forEach(board => { 
+    const option = document.createElement("option"); 
+    option.value = board; 
+    option.textContent = board; 
+    $("examBoard").appendChild(option); 
+  }); 
+ 
+  $("topicMenu").innerHTML = ""; 
+  currentSubject.topics.forEach(topic => { 
+    const option = document.createElement("option"); 
+    option.value = topic; 
+    option.textContent = topic; 
+    $("topicMenu").appendChild(option); 
+  }); 
+ 
+  if (openStudyView) {
+    $("homeView").classList.add("hidden"); 
+    $("studyView").classList.remove("hidden");
+  }
+  loadQuestion(); 
+  updateStats(); 
+} 
+ 
+function loadQuestion() { 
+  const topic = $("topicMenu").value; 
+  const list = questionBank[currentSubject.id + ":" + topic]; 
+ 
+  hintLevel = 0; 
+  $("hintPanel").classList.add("hidden"); 
+  $("solutionPanel").classList.add("hidden"); 
+  $("feedback").classList.add("hidden"); 
+  $("answerInput").value = ""; 
+ 
+  if (!list || !list.length) { 
+    currentQuestion = null; 
+    $("questionText").textContent = 
+      "No practice questions are available for this topic yet."; 
+    $("questionMeta").textContent = currentSubject.name + " · " + $("examBoard").value; 
+    $("resourceNote").textContent = 
+      "This topic has no embedded practice questions yet. Use the official past-paper link below and check your exact specification."; 
+    return; 
+  } 
+ 
+  currentQuestion = list[questionOrder % list.length]; 
+  questionOrder++; 
+  $("questionText").textContent = currentQuestion.q; 
+  $("questionMeta").textContent = 
+    currentSubject.name + " · " + $("examBoard").value + " · " + topic; 
+  $("resourceNote").textContent = 
+    "Original starter practice question, not an official past-paper question. Check your specification for exact course requirements."; 
+} 
+ 
+function checkAnswer() { 
+  if (!currentQuestion) { 
+    $("feedback").textContent = 
+      "There are no embedded practice questions for this topic. Open the official past-paper resource for more practice."; 
+    $("feedback").classList.remove("hidden"); 
+    return; 
+  } 
+ 
+  const userAnswer = $("answerInput").value.trim().toLowerCase().replace(/\s+/g, ""); 
+  const accepted = currentQuestion.answer.map(a => a.toLowerCase().replace(/\s+/g, "")); 
+  const correct = accepted.includes(userAnswer); 
+ 
+  const s = subjectStats(); 
+  s.attempted++; 
+  if (correct) s.correct++; 
+  saveStats(); 
+  updateStats(); 
+ 
+  $("feedback").textContent = correct 
+    ? "Correct! " + currentQuestion.explanation 
+    : "Not quite. Try using a hint, then check your working. You can reveal the worked solution when ready."; 
+  $("feedback").classList.remove("hidden"); 
+} 
+ 
+function showHint() { 
+  if (!currentQuestion) { 
+    $("hintPanel").textContent = "Hints will appear here once this topic has a question bank."; 
+    $("hintPanel").classList.remove("hidden"); 
+    return; 
+  } 
+ 
+  hintLevel = Math.min(hintLevel + 1, currentQuestion.hints.length); 
+  if (hintLevel === 0) return; 
+ 
+  $("hintPanel").textContent = 
+    "Hint " + hintLevel + ": " + currentQuestion.hints[hintLevel - 1]; 
+  $("hintPanel").classList.remove("hidden"); 
+} 
+ 
+function showNextHint() { 
+  if (!currentQuestion) { 
+    showHint(); 
+    return; 
+  } 
+  if (hintLevel >= currentQuestion.hints.length) { 
+    $("hintPanel").textContent = "You've seen all the hints. Try the question or reveal the solution."; 
+    $("hintPanel").classList.remove("hidden"); 
+    return; 
+  } 
+  showHint(); 
+} 
+ 
+function showSolution() { 
+  if (!currentQuestion) { 
+    $("solutionPanel").textContent = 
+      "Worked solutions will be added alongside the question bank for this topic."; 
+  } else { 
+    $("solutionPanel").textContent = "Worked solution:\n" + currentQuestion.solution; 
+  } 
+  $("solutionPanel").classList.remove("hidden"); 
+} 
+ 
+function openSpecification() { 
+  const url = currentSubject.boardLinks[$("examBoard").value]; 
+  if (url) window.open(url, "_blank", "noopener,noreferrer"); 
+} 
+ 
+function openVideoSearch() { 
+  const query = encodeURIComponent( 
+    currentSubject.name + " " + $("topicMenu").value + " exam revision teaching" 
+  ); 
+  const url = currentSubject.id === "maths" 
+    ? "https://www.youtube.com/results?search_query=" + 
+      encodeURIComponent("TLMaths A Level Maths " + $("topicMenu").value) 
+    : "https://www.youtube.com/results?search_query=" + query; 
+ 
+  window.open(url, "_blank", "noopener,noreferrer"); 
+} 
+ 
+$("subjectMenu").addEventListener("change", e => {
+  selectSubject(e.target.value, false);
+}); 
+$("startButton").addEventListener("click", () => {
+  selectSubject($("subjectMenu").value, true); 
+}); 
+$("backButton").addEventListener("click", () => { 
+  $("studyView").classList.add("hidden"); 
+  $("homeView").classList.remove("hidden"); 
+}); 
+$("topicMenu").addEventListener("change", loadQuestion); 
+$("examBoard").addEventListener("change", loadQuestion); 
+$("checkButton").addEventListener("click", checkAnswer); 
+$("hintButton").addEventListener("click", showHint); 
+$("nextHintButton").addEventListener("click", showNextHint); 
+$("solutionButton").addEventListener("click", showSolution); 
+$("nextButton").addEventListener("click", loadQuestion); 
+$("specButton").addEventListener("click", openSpecification); 
+$("videoButton").addEventListener("click", openVideoSearch); 
+ 
+safeLoadStats(); 
+buildHome(); 
+buildSubjectMenu(); 
+selectSubject("maths", false); 
+</script> 
+</body> 
+</html>
